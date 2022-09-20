@@ -3,7 +3,7 @@ import styled from "styled-components";
 import pattern from "../../assets/images/bg-main-desktop.png";
 import cardFront from "../../assets/images/bg-card-front.png";
 import cardBack from "../../assets/images/bg-card-back.png";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const HomeContainer = styled.div`
   display: grid;
@@ -121,24 +121,28 @@ const Details = styled.div`
 interface dataProps {
   cardHolder: string;
   cardNumber: number;
-  validity: number;
+  validity: string;
   cvc: number;
 }
-
 export function Home() {
   const [cardData, setCardData] = useState<dataProps>({} as dataProps);
 
-  function handleChange(e) {
-    setCardData({ ...cardData, [e.target.name]: e.target.value });
-  }
+  function handleChange(e: FormEvent) {
+    const target = e.target as HTMLInputElement;
 
+    setCardData({
+      ...cardData,
+      [target.name]: target.value,
+    });
+  }
+  console.log(cardData);
   return (
     <HomeContainer>
       <CardsContainer>
         <FrontCard>
           <span>LOGO</span>
           <div>
-            <span>{cardData.cardNumber}</span>
+            <span>{cardData.cardHolder}</span>
             <p>{cardData.cardHolder}</p>
             <p>{cardData.validity}</p>
           </div>

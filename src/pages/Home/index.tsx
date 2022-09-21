@@ -4,6 +4,7 @@ import pattern from "../../assets/images/bg-main-desktop.png";
 import cardFront from "../../assets/images/bg-card-front.png";
 import cardBack from "../../assets/images/bg-card-back.png";
 import { FormEvent, useState } from "react";
+import { Form } from "../../components/Form";
 
 const HomeContainer = styled.div`
   display: grid;
@@ -101,31 +102,19 @@ const BackCard = styled(card)`
   }
 `;
 
-const Details = styled.div`
-  max-width: 450px;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  justify-self: center;
-  form {
-    label {
-      display: flex;
-      flex-direction: column;
-    }
-    div {
-      display: flex;
-    }
-  }
-`;
-
 interface dataProps {
-  cardHolder: string;
-  cardNumber: number;
+  holder: string;
+  number: string;
   validity: string;
-  cvc: number;
+  cvc: string;
 }
 export function Home() {
-  const [cardData, setCardData] = useState<dataProps>({} as dataProps);
+  const [cardData, setCardData] = useState<dataProps>({
+    holder: "",
+    number: "",
+    validity: "",
+    cvc: "",
+  } as dataProps);
 
   function handleChange(e: FormEvent) {
     const target = e.target as HTMLInputElement;
@@ -135,69 +124,36 @@ export function Home() {
       [target.name]: target.value,
     });
   }
-  console.log(cardData);
+
+  function checkTheInitialOfCardToSetFlag() {
+    switch (cardData.number.charAt(0)) {
+      case "4":
+        return "Visa";
+      case "5":
+        return "Master";
+      default:
+        return "Logo";
+    }
+  }
+
   return (
     <HomeContainer>
       <CardsContainer>
         <FrontCard>
-          <span>LOGO</span>
+          <span>{checkTheInitialOfCardToSetFlag()}</span>
           <div>
-            <span>{cardData.cardHolder}</span>
-            <p>{cardData.cardHolder}</p>
-            <p>{cardData.validity}</p>
+            <span>
+              {cardData.number.length ? cardData.number : "1234 1234 1234 1234"}
+            </span>
+            <p>{cardData.holder.length ? cardData.holder : "John Doe"} </p>
+            <p>{cardData.validity.length ? cardData.validity : "01/11"}</p>
           </div>
         </FrontCard>
         <BackCard>
-          <p>{cardData.cvc}</p>
+          <p>{cardData.cvc.length ? cardData.cvc : "123"}</p>
         </BackCard>
       </CardsContainer>
-      <Details>
-        <form action="">
-          <label htmlFor="CardHolder">
-            Card Holder
-            <input
-              type="text"
-              id="CardHolder"
-              name="cardHolder"
-              value={cardData.cardHolder}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="CardNumber">
-            Card Number
-            <input
-              type="text"
-              id="CardNumber"
-              name="cardNumber"
-              value={cardData.cardNumber}
-              onChange={handleChange}
-            />
-          </label>
-
-          <div>
-            <label htmlFor="ExpDate">
-              Exp. Date (MM/YY)
-              <input
-                type="text"
-                name="validity"
-                value={cardData.validity}
-                onChange={handleChange}
-              />
-            </label>
-
-            <label htmlFor="cvc">
-              CVC
-              <input
-                type="text"
-                id="cvc"
-                name="cvc"
-                value={cardData.cvc}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-        </form>
-      </Details>
+      <Form cardData={cardData} onChange={handleChange} />
     </HomeContainer>
   );
 }

@@ -5,6 +5,7 @@ import cardFront from "../../assets/images/bg-card-front.png";
 import cardBack from "../../assets/images/bg-card-back.png";
 import { FormEvent, useState } from "react";
 import { Form } from "../../components/Form";
+import { format } from "../../utils/formatters";
 
 const HomeContainer = styled.div`
   display: grid;
@@ -119,6 +120,8 @@ export function Home() {
   function handleChange(e: FormEvent) {
     const target = e.target as HTMLInputElement;
 
+    format(e);
+
     setCardData({
       ...cardData,
       [target.name]: target.value,
@@ -132,10 +135,9 @@ export function Home() {
       case "5":
         return "Master";
       default:
-        return "Logo";
+        return false;
     }
   }
-
   return (
     <HomeContainer>
       <CardsContainer>

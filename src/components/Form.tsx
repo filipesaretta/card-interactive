@@ -29,7 +29,7 @@ export function Form({ cardData, onChange }: dataProps) {
         <label htmlFor="CardNumber">
           Card Number
           <input
-            type="number"
+            type="text"
             id="CardNumber"
             name="number"
             value={cardData.number}

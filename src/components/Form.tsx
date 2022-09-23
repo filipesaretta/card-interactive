@@ -5,8 +5,9 @@ interface dataProps {
   cardData: {
     holder: string;
     number: string;
-    validity: string;
     cvc: string;
+    month: string;
+    year: string;
   };
   onChange: (e: FormEvent<HTMLInputElement>) => void;
 }
@@ -14,9 +15,9 @@ interface dataProps {
 export function Form({ cardData, onChange }: dataProps) {
   return (
     <Details>
-      <form action="">
+      <form>
         <label htmlFor="CardHolder">
-          Card Holder
+          <span>Card Holder</span>
           <input
             type="text"
             id="CardHolder"
@@ -26,8 +27,9 @@ export function Form({ cardData, onChange }: dataProps) {
             placeholder="John Doe"
           />
         </label>
+
         <label htmlFor="CardNumber">
-          Card Number
+          <span>Card Number</span>
           <input
             type="text"
             id="CardNumber"
@@ -40,18 +42,25 @@ export function Form({ cardData, onChange }: dataProps) {
 
         <div>
           <label htmlFor="ExpDate">
-            Exp. Date (MM/YY)
+            <span>Exp. Date (MM/YY)</span>
             <input
               type="text"
-              name="validity"
-              value={cardData.validity}
+              name="month"
+              value={cardData.month}
               onChange={onChange}
-              placeholder="01/11"
+              placeholder="01"
+            />
+            <input
+              type="text"
+              name="year"
+              value={cardData.year}
+              onChange={onChange}
+              placeholder="23"
             />
           </label>
 
           <label htmlFor="cvc">
-            CVC
+            <span>CVC</span>
             <input
               type="text"
               id="cvc"
@@ -62,6 +71,7 @@ export function Form({ cardData, onChange }: dataProps) {
             />
           </label>
         </div>
+        <button type="submit">Confirm</button>
       </form>
     </Details>
   );

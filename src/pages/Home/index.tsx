@@ -5,7 +5,7 @@ import cardFront from "../../assets/images/bg-card-front.png";
 import cardBack from "../../assets/images/bg-card-back.png";
 import { FormEvent, useState } from "react";
 import { Form } from "../../components/Form";
-import { format } from "../../utils/formatters";
+import { formatInputData } from "../../utils/formatInputData";
 
 const HomeContainer = styled.div`
   display: grid;
@@ -106,21 +106,23 @@ const BackCard = styled(card)`
 interface dataProps {
   holder: string;
   number: string;
-  validity: string;
   cvc: string;
+  month: string;
+  year: string;
 }
 export function Home() {
   const [cardData, setCardData] = useState<dataProps>({
     holder: "",
     number: "",
-    validity: "",
     cvc: "",
+    month: "",
+    year: "",
   } as dataProps);
 
   function handleChange(e: FormEvent) {
     const target = e.target as HTMLInputElement;
 
-    format(e);
+    formatInputData(e);
 
     setCardData({
       ...cardData,
@@ -148,7 +150,9 @@ export function Home() {
               {cardData.number.length ? cardData.number : "1234 1234 1234 1234"}
             </span>
             <p>{cardData.holder.length ? cardData.holder : "John Doe"} </p>
-            <p>{cardData.validity.length ? cardData.validity : "01/11"}</p>
+            <p>
+              {cardData.month || "01"} / {cardData.year || "23"}
+            </p>
           </div>
         </FrontCard>
         <BackCard>

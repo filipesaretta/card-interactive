@@ -6,6 +6,7 @@ import cardBack from "../../assets/images/bg-card-back.png";
 import { FormEvent, useState } from "react";
 import { Form } from "../../components/Form";
 import { formatInputData } from "../../utils/formatInputData";
+import { FormProvider, useForm } from "react-hook-form";
 
 const HomeContainer = styled.div`
   display: grid;
@@ -110,6 +111,7 @@ interface dataProps {
   month: string;
   year: string;
 }
+
 export function Home() {
   const [cardData, setCardData] = useState<dataProps>({
     holder: "",
@@ -140,6 +142,8 @@ export function Home() {
         return false;
     }
   }
+  const methods = useForm();
+
   return (
     <HomeContainer>
       <CardsContainer>
@@ -147,7 +151,7 @@ export function Home() {
           <span>{checkTheInitialOfCardToSetFlag()}</span>
           <div>
             <span>
-              {cardData.number.length ? cardData.number : "1234 1234 1234 1234"}
+              {cardData.number.length ? cardData.number : "1234 5678 9101 1234"}
             </span>
             <p>{cardData.holder.length ? cardData.holder : "John Doe"} </p>
             <p>
@@ -159,7 +163,9 @@ export function Home() {
           <p>{cardData.cvc.length ? cardData.cvc : "123"}</p>
         </BackCard>
       </CardsContainer>
-      <Form cardData={cardData} onChange={handleChange} />
+      <FormProvider {...methods}>
+        <Form handleChange={handleChange} />
+      </FormProvider>
     </HomeContainer>
   );
 }

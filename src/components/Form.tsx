@@ -1,29 +1,26 @@
 import { FormEvent } from "react";
+import { useFormContext } from "react-hook-form";
+
 import { Details } from "./styles";
 
 interface dataProps {
-  cardData: {
-    holder: string;
-    number: string;
-    cvc: string;
-    month: string;
-    year: string;
-  };
-  onChange: (e: FormEvent<HTMLInputElement>) => void;
+  handleChange: (e: FormEvent<HTMLInputElement>) => void;
 }
+export function Form({ handleChange }: dataProps) {
+  const { register, handleSubmit } = useFormContext();
 
-export function Form({ cardData, onChange }: dataProps) {
+  const onSubmit = handleSubmit((data) => console.log(data));
+
   return (
     <Details>
-      <form>
+      <form onSubmit={onSubmit}>
         <label htmlFor="CardHolder">
           <span>Card Holder</span>
           <input
             type="text"
-            id="CardHolder"
-            name="holder"
-            value={cardData.holder}
-            onChange={onChange}
+            {...register("holder", {
+              onChange: handleChange,
+            })}
             placeholder="John Doe"
           />
         </label>
@@ -33,9 +30,9 @@ export function Form({ cardData, onChange }: dataProps) {
           <input
             type="text"
             id="CardNumber"
-            name="number"
-            value={cardData.number}
-            onChange={onChange}
+            {...register("number", {
+              onChange: handleChange,
+            })}
             placeholder="1234 1234 1234 1234"
           />
         </label>
@@ -45,16 +42,16 @@ export function Form({ cardData, onChange }: dataProps) {
             <span>Exp. Date (MM/YY)</span>
             <input
               type="text"
-              name="month"
-              value={cardData.month}
-              onChange={onChange}
+              {...register("month", {
+                onChange: handleChange,
+              })}
               placeholder="01"
             />
             <input
               type="text"
-              name="year"
-              value={cardData.year}
-              onChange={onChange}
+              {...register("year", {
+                onChange: handleChange,
+              })}
               placeholder="23"
             />
           </label>
@@ -64,9 +61,9 @@ export function Form({ cardData, onChange }: dataProps) {
             <input
               type="text"
               id="cvc"
-              name="cvc"
-              value={cardData.cvc}
-              onChange={onChange}
+              {...register("cvc", {
+                onChange: handleChange,
+              })}
               placeholder="123"
             />
           </label>

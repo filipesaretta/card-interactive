@@ -7,6 +7,8 @@ import { FormEvent, useState } from "react";
 import { Form } from "../../components/Form";
 import { formatInputData } from "../../utils/formatInputData";
 import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const HomeContainer = styled.div`
   display: grid;
@@ -142,7 +144,32 @@ export function Home() {
         return false;
     }
   }
-  const methods = useForm();
+  const schema = yup
+    .object({
+      holder: yup.string().required("This field is required"),
+      number: yup
+        .string()
+        .required("This field is required")
+        .matches(/(^|\b\s+)\d+\s+/, "Needs to have 16 digits")
+        .min(19, "Must have 16 digits")
+        .max(19, "Must have 16 digits"),
+      month: yup
+        .string()
+        .matches(
+          /^(0?[1-9]|1[012])$/,
+          "Must be a valid month between 01 and 12"
+        ),
+      year: yup.string().matches(/[1-9]/, "It's expired "),
+      cvc: yup
+        .string()
+        .matches(/[0-9]/)
+        .min(3)
+        .max(3)
+        .required("This field is required"),
+    })
+    .required();
+
+  const methods = useForm({ resolver: yupResolver(schema) });
 
   return (
     <HomeContainer>

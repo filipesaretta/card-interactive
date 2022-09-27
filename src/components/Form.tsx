@@ -6,8 +6,20 @@ import { Details } from "./styles";
 interface dataProps {
   handleChange: (e: FormEvent<HTMLInputElement>) => void;
 }
+interface schemaProps {
+  holder: string;
+  number: string;
+  cvc: string;
+  month: string;
+  year: string;
+}
+
 export function Form({ handleChange }: dataProps) {
-  const { register, handleSubmit } = useFormContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useFormContext<schemaProps>();
 
   const onSubmit = handleSubmit((data) => console.log(data));
 
@@ -23,6 +35,7 @@ export function Form({ handleChange }: dataProps) {
             })}
             placeholder="John Doe"
           />
+          <p>{errors.holder?.message}</p>
         </label>
 
         <label htmlFor="CardNumber">
@@ -35,6 +48,7 @@ export function Form({ handleChange }: dataProps) {
             })}
             placeholder="1234 1234 1234 1234"
           />
+          <p>{errors.number?.message}</p>
         </label>
 
         <div>
@@ -47,6 +61,7 @@ export function Form({ handleChange }: dataProps) {
               })}
               placeholder="01"
             />
+
             <input
               type="text"
               {...register("year", {
@@ -54,6 +69,8 @@ export function Form({ handleChange }: dataProps) {
               })}
               placeholder="23"
             />
+            <p>{errors.month?.message}</p>
+            <p>{errors.year?.message}</p>
           </label>
 
           <label htmlFor="cvc">

@@ -6,8 +6,15 @@ export const Details = styled.div`
   justify-content: center;
   align-items: center;
   justify-self: center;
+
   form {
-    max-width: 100%;
+    width: 100%;
+    padding: 1rem;
+
+    .alert {
+      border-color: red;
+    }
+
     label[for="ExpDate"] {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -22,6 +29,7 @@ export const Details = styled.div`
         max-width: 4rem;
       }
     }
+
     label {
       display: flex;
       flex-direction: column;
@@ -36,6 +44,7 @@ export const Details = styled.div`
       border-radius: 6px;
       padding: 0.5rem 0.75rem;
       color: #160f1f;
+      width: 100%;
 
       &::placeholder {
         color: hsl(270, 3%, 87%);
@@ -49,6 +58,7 @@ export const Details = styled.div`
     div {
       display: flex;
     }
+
     button {
       display: flex;
       align-items: center;

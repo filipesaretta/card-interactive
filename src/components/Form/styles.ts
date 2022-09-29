@@ -12,7 +12,13 @@ export const Details = styled.div`
     padding: 1rem;
 
     .alert {
-      border-color: red;
+      border-color: hsl(0, 100%, 66%);
+    }
+    .errors {
+      padding-left: 0.3rem;
+      padding-top: 0.2rem;
+      color: hsl(0, 100%, 66%);
+      line-height: 1.2;
     }
 
     label[for="ExpDate"] {
@@ -70,6 +76,13 @@ export const Details = styled.div`
       background-color: hsl(278, 68%, 11%);
       border-radius: 6px;
       cursor: pointer;
+      transition: outline 300ms ease-in-out;
+
+      &:focus,
+      &:hover {
+        outline: 3px solid hsl(278, 68%, 11%);
+        outline-offset: 0.2rem;
+      }
     }
   }
 `;

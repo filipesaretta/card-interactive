@@ -73,7 +73,7 @@ export function Form({ handleChange, handleResetCard }: dataProps) {
                 placeholder="John Doe"
                 className={errors.holder && "alert"}
               />
-              <p>{errors.holder?.message}</p>
+              <p className="errors">{errors.holder?.message}</p>
             </label>
 
             <label htmlFor="CardNumber">
@@ -87,7 +87,7 @@ export function Form({ handleChange, handleResetCard }: dataProps) {
                 placeholder="1234 1234 1234 1234"
                 className={errors.number && "alert"}
               />
-              <p>{errors.number?.message}</p>
+              <p className="errors">{errors.number?.message}</p>
             </label>
 
             <div>
@@ -101,7 +101,7 @@ export function Form({ handleChange, handleResetCard }: dataProps) {
                   placeholder="01"
                   className={errors.month && "alert"}
                 />
-                <p>{errors.month?.message}</p>
+                <p className="errors">{errors.month?.message}</p>
 
                 <input
                   type="text"
@@ -111,7 +111,7 @@ export function Form({ handleChange, handleResetCard }: dataProps) {
                   placeholder="23"
                   className={errors.year && "alert"}
                 />
-                <p>{errors.year?.message}</p>
+                <p className="errors">{errors.year?.message}</p>
               </label>
 
               <label htmlFor="cvc">
@@ -125,7 +125,7 @@ export function Form({ handleChange, handleResetCard }: dataProps) {
                   placeholder="123"
                   className={errors.cvc && "alert"}
                 />
-                <p>{errors.cvc?.message}</p>
+                <p className="errors">{errors.cvc?.message}</p>
               </label>
             </div>
             <button type="submit">Confirm</button>

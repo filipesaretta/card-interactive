@@ -10,20 +10,20 @@ interface dataProps {
   };
 }
 export function Cards({ cardData }: dataProps) {
-  function checkTheInitialOfCardToSetFlag() {
-    switch (cardData.number.charAt(0)) {
-      case "4":
-        return "Visa";
-      case "5":
-        return "Master";
-      default:
-        return false;
-    }
-  }
+  // function checkTheInitialOfCardToSetFlag() {
+  //   switch (cardData.number.charAt(0)) {
+  //     case "4":
+  //       return "Visa";
+  //     case "5":
+  //       return "Master";
+  //     default:
+  //       return false;
+  //   }
+  // }
   return (
     <CardsContainer>
       <FrontCard>
-        <span>{checkTheInitialOfCardToSetFlag()}</span>
+        {/* <span>{checkTheInitialOfCardToSetFlag()}</span> */}
         <div>
           <span>
             {cardData.number.length ? cardData.number : "1234 5678 9101 1234"}

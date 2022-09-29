@@ -1,4 +1,4 @@
-<h1 align="center"> Coffe Delivery</h1>
+<h1 align="center">Card Interactive</h1>
 
 <p align="center">
   <a href="#tech">Tech</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
